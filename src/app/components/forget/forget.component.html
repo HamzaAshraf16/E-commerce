@@ -1,0 +1,67 @@
+<section *ngIf="step1" class="bg-main-light p-4 rounded respons-forgot mx-auto">
+    <form class="" [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()">
+       
+        <div class="mb-2">
+            <label for="email">Email:</label>
+            <input formControlName="email" type="email" id="email" class="form-control mt-2" #inputEmail>
+
+            <div class="alert alert-danger mt-3" *ngIf="forgotPasswordForm.get('email')?.errors && (forgotPasswordForm.get('email')?.touched || inputEmail.value.length>0)">
+                <p *ngIf="forgotPasswordForm.get('email')?.getError('required') ">Email is Required</p>
+                <p *ngIf="forgotPasswordForm.get('email')?.getError('email') ">Email Should be Valid</p>
+            </div>
+           
+        </div>
+       
+        <button class="btn-main d-block ms-auto mt-3 w-100">
+            Forgot Password
+        </button>
+
+
+        <p class="alert alert-danger mt-2 mx-auto text-center" *ngIf="msg">{{msg}}</p>
+
+    </form>
+</section>
+
+<section *ngIf="step2" class="bg-main-light p-4 rounded respons-forgot mx-auto">
+    <form [formGroup]="resetCodeForm" (ngSubmit)="resetCode()">
+       
+        <div class="mb-2">
+            <label for="resetcode">Reset code:</label>
+            <input formControlName="resetCode" type="text" id="resetcode" class="form-control mt-2"  #inputresetCode>
+            <div class="alert alert-danger mt-3" *ngIf="resetCodeForm.get('resetCode')?.errors && (resetCodeForm.get('resetCode')?.touched || inputresetCode.value.length>0)">
+                <p *ngIf="resetCodeForm.get('resetCode')?.getError('required') ">resetCode is Required</p>
+            </div>
+            
+        </div>
+       
+        <button class="btn-main d-block ms-auto mt-3 w-100">
+            Confirm Reset code 
+        </button>
+
+
+        <p class="alert alert-danger mt-2 mx-auto text-center" *ngIf="msg">{{msg}}</p>
+
+    </form>
+</section>
+
+<section *ngIf="step3" class="bg-main-light p-4 rounded respons-forgot mx-auto">
+    <form class="" [formGroup]="newPasswordForm" (ngSubmit)="newPassword()">
+       
+        <div class="mb-2">
+            <label for="newpassword">New password:</label>
+            <input formControlName="newPassword" type="password" id="newpassword" class="form-control mt-2" #inputPassword>
+            <div class="alert alert-danger mt-3" *ngIf="newPasswordForm.get('password')?.errors && (newPasswordForm.get('password')?.touched || inputPassword.value.length>0)">
+                <p *ngIf="newPasswordForm.get('password')?.getError('required') ">Password is Required</p>
+                <p *ngIf="newPasswordForm.get('password')?.getError('pattern') ">Password must start with uppercase then 6 to 20 Characters</p>
+            </div>
+        </div>
+       
+        <button class="btn-main d-block ms-auto mt-3 w-100">
+            Update Password
+        </button>
+
+
+        <p class="alert alert-danger mt-2 mx-auto text-center" *ngIf="msg">{{msg}}</p>
+
+    </form>
+</section>

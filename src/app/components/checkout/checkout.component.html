@@ -1,0 +1,42 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+    <h1>Checkout Session</h1>
+
+    <form [formGroup]="checkout" class="mt-3" (ngSubmit)="handleForm()">
+        <div class="mb-2">
+            <label for="details">Address Details:</label>
+            <textarea id="details"  class="form-control" formControlName="details" #inputDetails></textarea>
+            <div class="alert alert-danger mt-3" *ngIf="checkout.get('details')?.errors && (checkout.get('details')?.touched || inputDetails.value.length>0)">
+                <p *ngIf="checkout.get('details')?.getError('required') ">Address Details is Required</p>
+                <p *ngIf="checkout.get('details')?.getError('minlength') ">Miniumm Length Should be 50 Characters</p>
+                <p *ngIf="checkout.get('details')?.getError('maxlength') ">Maxiumm Length Should be 255 Characters</p>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" class="form-control" formControlName="phone" #inputPhone>
+            <div class="alert alert-danger mt-3" *ngIf="checkout.get('phone')?.errors && (checkout.get('phone')?.touched || inputPhone.value.length>0)">
+                <p *ngIf="checkout.get('phone')?.getError('required') ">Phone is Required</p>
+                <p *ngIf="checkout.get('phone')?.getError('pattern') ">Accept only phone numbers</p>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label for="city">City:</label>
+            <input type="text" id="city" class="form-control" formControlName="city" #inputCity/>
+            <div class="alert alert-danger mt-3" *ngIf="checkout.get('city')?.errors && (checkout.get('city')?.touched || inputCity.value.length>0)">
+                <p *ngIf="checkout.get('city')?.getError('required') ">Address City is Required</p>
+                <p *ngIf="checkout.get('city')?.getError('minlength') ">Miniumm Length Should be 5 Characters</p>
+                <p *ngIf="checkout.get('city')?.getError('maxlength') ">Maxiumm Length Should be 50 Characters</p>
+            </div>
+        </div>
+
+
+        <button [disabled]="checkout.invalid" class="btn-main d-block ms-auto mt-3">
+            Check out
+            <i *ngIf="isLoading" class="fas fa-spin fa-spinner"></i>
+        </button>
+
+
+
+    </form>
+</section>
